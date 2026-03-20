@@ -1,0 +1,5 @@
+.vscode/
+main
+.env
+thunder-tests/
+rss-aggregator
