@@ -1,0 +1,17 @@
+version: '3.8'
+services:
+  db:
+    image: postgres
+    container_name: rssagg-db
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 1709
+      POSTGRES_DB: rssagg
+    ports:
+      - "5432:5432"
+    volumes:
+      - rssagg-data:/var/lib/postgresql/data
+
+volumes:
+  rssagg-data:
