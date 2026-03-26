@@ -35,11 +35,11 @@ func main() {
 
 	conn, err := sql.Open("postgres", dbURL)
 	if err != nil{
-		log.Fatal("Can't Connect to database: ", err)
+		log.Fatal("Can't Connect to database:", err)
 	}
 
 	apiCfg := apiConfig{
-		
+		DB: database.New(conn),
 	}
 
 	//routee
@@ -59,6 +59,7 @@ func main() {
 	v1Router := chi.NewRouter()
 	v1Router.Get("/healthz", handlerReadiness) // if we use HandleFunc instead of GET then it will respond to POST too
 	v1Router.Get("/err", handlerErr)
+	v1Router.Post("/users", apiCfg.handlerCreateUser)
 
 	router.Mount("/v1", v1Router)
 
@@ -68,7 +69,7 @@ func main() {
 	}
 
 	log.Printf("Server starting on port %v", portString)
-	err := srv.ListenAndServe()
+	err = srv.ListenAndServe()
 	if err != nil {
 		log.Fatal(err)
 	}
