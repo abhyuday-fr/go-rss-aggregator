@@ -60,6 +60,7 @@ func main() {
 	v1Router.Get("/healthz", handlerReadiness) // if we use HandleFunc instead of GET then it will respond to POST too
 	v1Router.Get("/err", handlerErr)
 	v1Router.Post("/users", apiCfg.handlerCreateUser)
+	v1Router.Get("/users", apiCfg.handlerGetUser)
 
 	router.Mount("/v1", v1Router)
 

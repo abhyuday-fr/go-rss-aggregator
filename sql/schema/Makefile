@@ -1,3 +1,8 @@
+ifneq (,$(wildcard ../../.env))
+    include ../../.env
+    export
+endif
+
 #start database container
 db:
 	docker start rssagg-db
@@ -7,8 +12,8 @@ db-down:
 
 # Run database migrations up (apply changes)
 migrate-up:
-	goose postgres "postgres://postgres:1709@localhost:5432/rssagg" up
+	goose postgres $(DB_URL) up
 
 # Run database migrations down (rollback changes)
 migrate-down:
-	goose postgres "postgres://postgres:1709@localhost:5432/rssagg" down
+	goose postgres $(DB_URL) down
