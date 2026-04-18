@@ -21,6 +21,15 @@ type apiConfig struct{
 
 func main() {
 
+	// uncomment the snippet below for a quick sanity check of our aggregation worker
+	/*
+	feed, err := urlToFeed("https://bair.berkeley.edu/blog/feed.xml")
+	if err != nil{
+		log.Fatal(err)
+	}
+	fmt.Println(feed)
+	*/
+
 	godotenv.Load(".env")
 
 	portString := os.Getenv("PORT") // we don't want to use 'export PORT' all the time so we are gonna get the github.com/joho/godotenv package and do 'go mod vendor'
