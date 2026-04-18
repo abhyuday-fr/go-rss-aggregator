@@ -6,12 +6,13 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"time"
 
 	"github.com/abhyuday-fr/rss-aggregator/internal/database"
 	"github.com/go-chi/chi"
 	"github.com/go-chi/cors"
 	"github.com/joho/godotenv"
-	_"github.com/lib/pq"
+	_ "github.com/lib/pq"
 )
 
 type apiConfig struct{
@@ -47,9 +48,12 @@ func main() {
 		log.Fatal("Can't Connect to database:", err)
 	}
 
+	db := database.New(conn)
 	apiCfg := apiConfig{
-		DB: database.New(conn),
+		DB: db,
 	}
+
+	go startScraping(db, 10, time.Minute)
 
 	//routee
 	router := chi.NewRouter()
