@@ -107,6 +107,3 @@ The application starts a background worker that:
 3. Parses the RSS XML and saves new posts to the database.
 4. Automatically skips already existing posts to avoid duplicates.
 
-## 🤝 Contributing
-
-Feel free to open issues or submit pull requests to improve the project!
